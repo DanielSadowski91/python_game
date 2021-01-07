@@ -17,6 +17,14 @@ class Ship:
         #each new ship appears at the bottom of screen
         self.rect.midbottom = self.screen_rect.midbottom
 
+        #Option for moving ship
+        self.moving_right = False
+
+    def update(self):
+        """Update of ship position"""
+        if self.moving_right:
+            self.rect.x += 1
+
     def blitme(self):
         """display ship in his actual position"""
         self.screen.blit(self.image,self.rect)
