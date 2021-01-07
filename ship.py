@@ -19,11 +19,14 @@ class Ship:
 
         #Option for moving ship
         self.moving_right = False
+        self.moving_left = False
 
     def update(self):
         """Update of ship position"""
         if self.moving_right:
             self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
 
     def blitme(self):
         """display ship in his actual position"""
