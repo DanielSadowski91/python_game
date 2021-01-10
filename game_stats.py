@@ -7,6 +7,9 @@ class GameStats:
         self.settings = ai_game.settings
         self.reset_stats()
 
+        #Run game in active state
+        self.game_active = True
+
     def reset_stats(self):
         """ Variable statistic data in the game"""
         self.ships_left = self.settings.ship_limit

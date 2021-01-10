@@ -39,9 +39,12 @@ class AlienInvasion:
         """
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.stats.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
 
     def _check_events(self):
@@ -102,19 +105,31 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """Reaction for collision between alien and ship"""
-        #Reduce value saved in ships_left
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0 :
+            #Reduce value saved in ships_left
+            self.stats.ships_left -= 1
 
-        #delete content of list aliens and bullet
-        self.aliens.empty()
-        self.bullets.empty()
+            #delete content of list aliens and bullet
+            self.aliens.empty()
+            self.bullets.empty()
 
-        #Creation of new fleet and centering ship
-        self._create_fleet()
-        self.ship.center_ship()
+            #Creation of new fleet and centering ship
+            self._create_fleet()
+            self.ship.center_ship()
 
-        #Pause
-        sleep(0.5)
+            #Pause
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
+
+    def _check_aliens_bottom(self):
+        """Checking if some aliens reached bottom edge of screen"""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                #the same like hitting ship
+                self._ship_hit()
+                break
 
     def _update_aliens(self):
         """Update position of all aliens"""
@@ -124,6 +139,9 @@ class AlienInvasion:
         #detecting collision between alien and ship
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
+
+        #searching for aliens whose reached bottom edge of screen
+        self._check_aliens_bottom()
 
     def _create_fleet(self):
         """Creating an army of aliens"""
