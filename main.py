@@ -83,6 +83,7 @@ class AlienInvasion:
 
     def _update_aliens(self):
         """Update position of all aliens"""
+        self._check_fleet_edges()
         self.aliens.update()
 
     def _create_fleet(self):
@@ -113,6 +114,19 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
+
+    def _check_fleet_edges(self):
+        """reaction when alien reach edge of screen"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        """Moving fleet down and changing direction of movement"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
     def _update_screen(self):
         #screen refreshing during each loop
