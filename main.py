@@ -30,14 +30,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-
-            #delete bullets that are off the screen
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-            print(len(self.bullets))
-
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self):
@@ -74,6 +67,14 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
+    def _update_bullets(self):
+        """Update position of bullets and deleting bullets that are off the screen"""
+        self.bullets.update()
+
+        #delete bullets that are off the screen
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
     def _update_screen(self):
         #screen refreshing during each loop
         self.screen.fill(self.settings.bg_color)
