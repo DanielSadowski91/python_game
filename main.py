@@ -20,9 +20,10 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((0, 0),pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        self.screen = pygame.display.set_mode((1200, 800))
+        #pygame.FULLSCREEN)
+        #self.settings.screen_width = self.screen.get_rect().width
+        #self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
         #container for statistic data
@@ -35,7 +36,7 @@ class AlienInvasion:
         self._create_fleet()
 
         #Creation of button "game"
-        self.play_button = Button(self, "Game")
+        self.play_button = Button(self, msg = "Game")
 
     def run_game(self):
         """

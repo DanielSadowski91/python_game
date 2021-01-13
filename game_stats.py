@@ -8,7 +8,7 @@ class GameStats:
         self.reset_stats()
 
         #Run game in inactive state
-        self.game_active = True
+        self.game_active = False
 
     def reset_stats(self):
         """ Variable statistic data in the game"""
