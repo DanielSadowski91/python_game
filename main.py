@@ -67,7 +67,8 @@ class AlienInvasion:
 
     def _check_play_button(self, mouse_pos):
         """start new game after press button game"""
-        if self.play_button.rect.collidepoint(mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.game_active:
             #reset game stats
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -79,6 +80,9 @@ class AlienInvasion:
             #Create new fleet and center ship
             self._create_fleet()
             self.ship.center_ship()
+
+            #hide mouse
+            pygame.mouse.set_visible(False)
 
 
     def _check_keydown_events(self,event):
@@ -145,6 +149,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):
         """Checking if some aliens reached bottom edge of screen"""
