@@ -13,7 +13,7 @@ class Scoreboard:
 
         #Font for score
         self.text_color = (30, 30, 30)
-        self.font = pygamje.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont(None, 48)
 
         #Prep initial image with score
         self.prep_score()
@@ -26,6 +26,9 @@ class Scoreboard:
 
         #Show score in right upper corner
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.right = self.scren_rect.right -20
+        self.score_rect.right = self.screen_rect.right -20
         self.score_rect.top = 20
 
+    def show_score(self):
+        """show scoreboard on screen"""
+        self.screen.blit(self.score_image, self.score_rect)

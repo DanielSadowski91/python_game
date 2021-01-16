@@ -31,7 +31,6 @@ class Settings:
 
         self.initalize_dynamic_settings()
 
-        
 
     def initalize_dynamic_settings(self):
         """changing settings in game"""
