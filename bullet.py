@@ -18,14 +18,14 @@ class Bullet(Sprite):
         self.rect.midtop = ai_game.ship.rect.midtop
 
         #position of bullet is a float
-        self.y = float(self.rect.y)
+        self.y_high = float(self.rect.y)
 
     def update(self):
         """bullet on screen"""
         #update position of bullet
-        self.y -= self.settings.bullet_speed
+        self.y_high -= self.settings.bullet_speed
         #update position of rect bullet
-        self.rect.y = self.y
+        self.rect.y = self.y_high
 
     def draw_bullet(self):
         """Display bullet on screen"""
