@@ -4,7 +4,7 @@ import pygame.font
 class Scoreboard:
     """Class for score"""
 
-    def __init__(self,ai_game):
+    def __init__(self, ai_game):
         """Startiting couting score"""
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
@@ -18,6 +18,7 @@ class Scoreboard:
         #Prep initial image with score
         self.prep_score()
         self.prep_high_score()
+        self.prep_level()
 
     def prep_score(self):
         """Conversion score for generated image"""
@@ -35,6 +36,7 @@ class Scoreboard:
         """show scoreboard on screen"""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image, self.level_rect)
 
     def prep_high_score(self):
         """Conversion highest score for image"""
@@ -53,4 +55,16 @@ class Scoreboard:
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
-            
+
+    def prep_level(self):
+        """conversion game level for image"""
+        level_str = str(self.stats.level)
+        self.level_image = self.font.render(level_str, True,
+            self.text_color, self.settings.bg_color)
+
+        #level nmber is show under aktual score
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.right = self.score_rect.right
+        self.level_rect.top = self.score_rect.bottom +10
+
+
