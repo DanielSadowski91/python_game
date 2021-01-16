@@ -42,7 +42,7 @@ class Scoreboard:
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
-        self.screen.draw(self.screen)
+        self.ships.draw(self.screen)
 
     def prep_high_score(self):
         """Conversion highest score for image"""
@@ -81,4 +81,3 @@ class Scoreboard:
             ship.rect.x = 10 + ship_number * ship.rect.width
             ship.rect.y = 10
             self.ships.add(ship)
-            
