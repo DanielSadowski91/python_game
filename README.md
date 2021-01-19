@@ -1,2 +1,2 @@
 # python_game
-1st game in python
+First game writen in python. Its popular game in books - Alien Invasion.
